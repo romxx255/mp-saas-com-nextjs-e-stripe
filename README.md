@@ -1,48 +1,62 @@
-# Autenticação com NextAuth, Prisma e Next.js 15
+# SaaS com Next.js e Stripe
 
-Neste mini projeto, você irá implementar a autenticação em um hipotético SaaS de Livros de Programação. Usaremos o NextAuth para gerenciar a autenticação e o Prisma para a interação com o banco de dados, enquanto nosso frameworks será o Next.js 15. O design já está preparado, e o foco será na implementação das funcionalidades sem a necessidade de modificar muito o HTML e o CSS.
+>[!IMPORTANT] 
+> Este Mini Projeto faz parte da série **Criando um SaaS com Next.js**
+>
+> Mini Projeto 1: [SaaS Landing Page com Next.js e Shadcn UI](https://codante.io/mini-projetos/saas-landing-page-com-nextjs-e-shadcn-ui)  
+> Mini Projeto 2: [SaaS - Autenticação com NextAuth, Prisma e Next.js 15](https://codante.io/mini-projetos/autenticacao-com-nextauth-prisma-e-nextjs-15)  
+> Mini Projeto 3: SaaS com Next.js e Stripe (este projeto)
+
+Neste mini projeto, você irá adicionar o Stripe como meio de pagamento e gerenciador de assinaturas do seu projeto. Sua aplicação deve permitir que usuários possam assinar (através de pagamentos recorrentes) bem como cancelar suas assinaturas. O produto (Ebook do mês) só deverá ser exibido para aqueles que são assinantes ativos. 
+
 
 ## 🤓 Antes de começar
 
 Para este projeto, já temos o template inicial do projeto preparado no repositório. Ao fazer o fork você encontrará todos os arquivos iniciais. 
 
-Apesar de, na Dashboard, existir citação à assinaturas, não é necessário se preocupar com assinaturas e pagamentos nesse Mini Projeto. O foco aqui é autenticação. 
+>[!CAUTION] 
+> Como o Next 15 ainda é muito recente é possível que você encontre alguns erros de `peer deps` na hora de instalar suas dependências. É possível forçar uma instalação evitando esses erros usando o comando `npm install --force`.
+
+#### Setup do Turso
+Para que a autenticação funcione, é necessário que você tenha uma conta e database (gratuita) do [Turso](turso.tech) para a base de dados.
+
+Pegue suas credenciais e complete o `.env` (ou `.env.local`) com as chaves 
+- `TURSO_AUTH_TOKEN=`
+- `TURSO_DATABASE_URL=`
+
+Se você quiser mais informações, vide o [Mini Projeto anterior](https://codante.io/mini-projetos/autenticacao-com-nextauth-prisma-e-nextjs-15) desta série.
+
+#### Setup do NextAuth
+No Mini Projeto anterior também fizemos o Setup do NextAuth. Para tal, é necessário que você coloque qualquer string aleatória na chave `AUTH_SECRET=` e sua url (provavelmente http://localhost:3000) na chave `AUTH_URL=` todos no `.env` (ou `.env.local`).
 
 ## 🔨 Requisitos
 
-- **Faça a instalação e o setup do NextAuth v5 (a última versão é importante).**
-  - O único provedor que você irá usar neste Mini Projeto é o `Credentials` (login com email e senha). 
+- Faça o cadastro e setup de uma conta no Stripe
+  - Crie uma conta e credenciais de teste no Stripe
 
-- **Crie e gerencie sua base de dados (sqlite, mysql ou postgres) usando o Prisma**
-  - Você precisará, pelo menos, de uma tabela de usuários
-	
-    > 👀 **Dicas:**
-    > - Consulte a documentação do NextAuth para entender como configurar o Prisma em conjunto com NextAuth.
+> [!TIP]
+> Recomendamos que você use os *sandboxes* do Stripe para testes. 
 
-- **Funcionalidade de registrar usuários usando a tela de cadastro**
-  - Use, na medida do possível, _server actions_.
-  - Um usuário deverá possuir _nome_, _email_ e _senha_.
-  - A senha deverá ser criptografada antes de ser salva na base de dados.
-  - A tela de cadastro não pode ser acessível a usuários logados (redirecione ao dashboard)
+- Implemente o pagamento recorrente da assinatura
+  - Apenas usuários logados poderão assinar
+  - Utilize o Stripe como provedor de assinaturas
 
-      > 👀 **Dicas:**
-      > - O NextAuth auxilia apenas no login do usuário - a implementação do cadastro de usuário deverá ser feita por você.
+> [!TIP]
+> Para facilitar o desenvolvimento você não precisa necessariamente utilizar a sua base de dados para gerenciar assinaturas. A escolha é sua, você deverá escolher se quer gerenciar assinante PRO pelo _Stripe_ ou pela base de dados. 
 
-- **Funcionalidade de logar usuários usando a tela de login**
-  - Use, na medida do possível, _server actions_.
-  - Ao logar, redirecione o usuário para a tela de dashboard.
-  - A tela de login não pode ser acessível a usuários logados (redirecione ao dashboard)
- 
-- **Funcionalidade de deslogar o usuário.**
+- Implemente o cancelamento da assinatura
+  - Implemente um botão que deverá estar na dashboard para cancelar a assinatura
+  - Apenas usuários logados e assinantes poderão cancelar
 
-- **Navegação e renderização condicional**
-  - Na home, quando o usuário estiver logado, o botão da Navbar deverá ser `Dashboard`. Quando o usuário estiver deslogado, o botão deverá ser `Login`.
-  - Um usuário deslogado não poderá acessar a Dashboard.
-  - Um usuário logado não poderá acessar as telas de login e cadastro. 
+- Implemente a troca de meio de pagamento
+  - Você poderá tanto implementar pela API (mais difícil) como redirecionando para o portal no-code do Stripe (mais fácil)
 
-## 🔨 Desafio extra para quem quer ir além
+- Proteger rotas
+  - O produto (Ebook do Mês) somente deverá ser acessado por aqueles que possuem assinaturas ativas
+  - A tela de gerenciamento de assinatura somente deverá ser acessada por aqueles que possuem assinaturas ativas
 
-- Implemente uma página de perfil onde o usuário poderá visualizar e editar suas informações como _nome_ e _senha_. 
+- Remover botoes (call to action) de assinatura caso o usuário já seja assinante
+  - Para uma UX melhor, não faz sentido mostrar botões de "Assine Agora" para quem já é assinante. 
 
 ## 🎨 Design Sugerido
 
@@ -50,7 +64,7 @@ O layout está no Figma e já está implementado no projeto. Você não precisar
 
 ### Figma
 
-🔗 [Link do design](https://www.figma.com/community/file/1431066927390390144/mini-projeto-saas-autenticacao-com-nextauth-prisma-e-next-js-15)
+🔗 [Link do design]()
 
 ## 👉🏽 Sobre esse mini-projeto
 
@@ -60,7 +74,7 @@ O layout está no Figma e já está implementado no projeto. Você não precisar
 
 - Conhecimentos sobre a configuração de páginas e rotas dinâmicas.
 
-#### NextAuth
+#### Stripe
 
 - Aprender sobre autenticação em aplicações Next.js.
 - Integração do NextAuth com Prisma e base de dados. 
