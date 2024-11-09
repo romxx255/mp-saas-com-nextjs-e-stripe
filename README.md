@@ -31,31 +31,31 @@ No Mini Projeto anterior também fizemos o Setup do NextAuth. Para tal, é neces
 
 ## 🔨 Requisitos
 
-- Faça o cadastro e setup de uma conta no Stripe
+- **Faça o cadastro e setup de uma conta no Stripe**
   - Crie uma conta e credenciais de teste no Stripe
 
 > [!TIP]
 > Recomendamos que você use os *sandboxes* do Stripe para testes. 
 
-- Implemente o pagamento recorrente da assinatura
+- **Implemente o pagamento recorrente da assinatura**
   - Apenas usuários logados poderão assinar
   - Utilize o Stripe como provedor de assinaturas
 
 > [!TIP]
 > Para facilitar o desenvolvimento você não precisa necessariamente utilizar a sua base de dados para gerenciar assinaturas. A escolha é sua, você deverá escolher se quer gerenciar assinante PRO pelo _Stripe_ ou pela base de dados. 
 
-- Implemente o cancelamento da assinatura
+- **Implemente o cancelamento da assinatura**
   - Implemente um botão que deverá estar na dashboard para cancelar a assinatura
   - Apenas usuários logados e assinantes poderão cancelar
 
-- Implemente a troca de meio de pagamento
+- **Implemente a troca de meio de pagamento**
   - Você poderá tanto implementar pela API (mais difícil) como redirecionando para o portal no-code do Stripe (mais fácil)
 
-- Proteger rotas
+- **Proteger rotas**
   - O produto (Ebook do Mês) somente deverá ser acessado por aqueles que possuem assinaturas ativas
   - A tela de gerenciamento de assinatura somente deverá ser acessada por aqueles que possuem assinaturas ativas
 
-- Remover botoes (call to action) de assinatura caso o usuário já seja assinante
+- **Remover botoes (call to action) de assinatura caso o usuário já seja assinante**
   - Para uma UX melhor, não faz sentido mostrar botões de "Assine Agora" para quem já é assinante. 
 
 ## 🎨 Design Sugerido
@@ -64,7 +64,7 @@ O layout está no Figma e já está implementado no projeto. Você não precisar
 
 ### Figma
 
-🔗 [Link do design]()
+🔗 [Link do design](https://www.figma.com/community/file/1436880854972199964/mini-projeto-saas-com-next-js-e-stripe)
 
 ## 👉🏽 Sobre esse mini-projeto
 
@@ -76,14 +76,8 @@ O layout está no Figma e já está implementado no projeto. Você não precisar
 
 #### Stripe
 
-- Aprender sobre autenticação em aplicações Next.js.
+- Integração completa com o Stripe para pagamentos e gestão de assinaturas.
 - Integração do NextAuth com Prisma e base de dados. 
-
-#### Prisma
-
-- Gerenciar banco de dados de forma eficiente e intuitiva.
-- Criação de modelos e migrações com Prisma.
-
 
 ### Pré requisitos
 
