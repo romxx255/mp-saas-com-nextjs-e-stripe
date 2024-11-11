@@ -18,7 +18,7 @@ Para este projeto, já temos o template inicial do projeto preparado no reposit�
 > Como o Next 15 ainda é muito recente é possível que você encontre alguns erros de `peer deps` na hora de instalar suas dependências. É possível forçar uma instalação evitando esses erros usando o comando `npm install --force`.
 
 #### Setup do Turso
-Para que a autenticação funcione, é necessário que você tenha uma conta e database (gratuita) do [Turso](turso.tech) para a base de dados.
+Para que a autenticação funcione, é necessário que você tenha uma conta e database (gratuita) do [Turso](https://turso.tech) para a base de dados.
 
 Pegue suas credenciais e complete o `.env` (ou `.env.local`) com as chaves 
 - `TURSO_AUTH_TOKEN=`
