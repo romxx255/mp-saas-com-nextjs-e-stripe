@@ -1,8 +1,7 @@
 # SaaS com Next.js e Stripe
 
->[!IMPORTANT] 
-> Este Mini Projeto faz parte da série **Criando um SaaS com Next.js**
->
+> Este Mini Projeto faz parte da série **Criando um SaaS com Next.js**  
+>  
 > Mini Projeto 1: [SaaS Landing Page com Next.js e Shadcn UI](https://codante.io/mini-projetos/saas-landing-page-com-nextjs-e-shadcn-ui)  
 > Mini Projeto 2: [SaaS - Autenticação com NextAuth, Prisma e Next.js 15](https://codante.io/mini-projetos/autenticacao-com-nextauth-prisma-e-nextjs-15)  
 > Mini Projeto 3: SaaS com Next.js e Stripe (este projeto)
@@ -14,7 +13,7 @@ Neste mini projeto, você irá adicionar o Stripe como meio de pagamento e geren
 
 Para este projeto, já temos o template inicial do projeto preparado no repositório. Ao fazer o fork você encontrará todos os arquivos iniciais. 
 
->[!CAUTION] 
+>[!CAUTION]   
 > Como o Next 15 ainda é muito recente é possível que você encontre alguns erros de `peer deps` na hora de instalar suas dependências. É possível forçar uma instalação evitando esses erros usando o comando `npm install --force`.
 
 #### Setup do Turso
@@ -34,14 +33,14 @@ No Mini Projeto anterior também fizemos o Setup do NextAuth. Para tal, é neces
 - **Faça o cadastro e setup de uma conta no Stripe**
   - Crie uma conta e credenciais de teste no Stripe
 
-> [!TIP]
+> [!TIP]  
 > Recomendamos que você use os *sandboxes* do Stripe para testes. 
 
 - **Implemente o pagamento recorrente da assinatura**
   - Apenas usuários logados poderão assinar
   - Utilize o Stripe como provedor de assinaturas
 
-> [!TIP]
+> [!TIP]  
 > Para facilitar o desenvolvimento você não precisa necessariamente utilizar a sua base de dados para gerenciar assinaturas. A escolha é sua, você deverá escolher se quer gerenciar assinante PRO pelo _Stripe_ ou pela base de dados. 
 
 - **Implemente o cancelamento da assinatura**
