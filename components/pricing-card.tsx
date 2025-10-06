@@ -8,8 +8,18 @@ import {
   CardTitle,
 } from "./ui/card";
 import PaymentButton from "@/components/checkout";
+import Stripe from "stripe";
+import { auth } from "@/auth";
+import { fetchSubscriptionByEmail } from "@/lib/stripe";
 
-export default function PricingCard() {
+interface PricingCardProps {
+}
+
+export default async function PricingCard() {
+  const session = await auth();
+  const userEmail = session?.user?.email as string;
+  const userName = session?.user?.name as string;
+  const subscription = await fetchSubscriptionByEmail(userEmail);
   return (
     <Card className="w-[350px] text-left md:mt-20 mt-10">
       <CardHeader>
@@ -44,8 +54,8 @@ export default function PricingCard() {
           </li>
         </ul>
       </CardContent>
-      <CardFooter id='checkout'>
-        <PaymentButton>Assine Agora</PaymentButton>
+      <CardFooter id="checkout">
+        {!subscription && <PaymentButton>Assine Agora</PaymentButton>}
       </CardFooter>
     </Card>
   );

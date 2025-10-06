@@ -18,9 +18,12 @@ import { auth } from '@/auth';
 
 import PaymentButton from '@/components/checkout';
 
+import { fetchSubscriptionByEmail } from "@/lib/stripe";
+
 export default async function Home() {
   const session = await auth();
   const userName = session?.user?.name ?? '';
+  const subscription = await fetchSubscriptionByEmail(session?.user?.email as string);
 
   return (
     <main>
@@ -78,7 +81,7 @@ export default async function Home() {
               type="text"
               className="max-w-sm border-gray-300 border"
             />
-            <PaymentButton>Assine Agora</PaymentButton>
+             {!subscription && <PaymentButton>Assine Agora</PaymentButton>}
           </div>
           <p className="text-xs text-muted-foreground mt-2">
             Comece sua assinatura agora mesmo. Cancele quando quiser.
