@@ -16,6 +16,8 @@ import logo from './assets/logo.svg';
 import womanImg from './assets/woman.svg';
 import { auth } from '@/auth';
 
+import PaymentButton from '@/components/checkout';
+
 export default async function Home() {
   const session = await auth();
   const userName = session?.user?.name ?? '';
@@ -76,10 +78,10 @@ export default async function Home() {
               type="text"
               className="max-w-sm border-gray-300 border"
             />
-            <Button>Assine Agora</Button>
+            <PaymentButton>Assine Agora</PaymentButton>
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            Comece sua assinatura agora mesmo. Cancele quando quiser.{' '}
+            Comece sua assinatura agora mesmo. Cancele quando quiser.
           </p>
         </form>
       </section>
@@ -134,7 +136,6 @@ export default async function Home() {
           Faça como milhares de outras pessoas. Assine nosso produto e tenha
           garantido seus estudos{' '}
         </p>
-        <Button className="mt-14 w-96">Assine Agora</Button>
         <p className="text-xs text-muted-foreground mt-2">
           Comece sua assinatura agora mesmo. Cancele quando quiser.{' '}
         </p>

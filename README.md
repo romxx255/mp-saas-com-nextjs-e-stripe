@@ -81,3 +81,7 @@ O layout está no Figma e já está implementado no projeto. Você não precisar
 ### Pré requisitos
 
 - Conhecimentos em JavaScript, React e NextJs.
+
+## Observações
+
+O correto é sempre marcar o se o usuário tem a assinatura no banco de dados.

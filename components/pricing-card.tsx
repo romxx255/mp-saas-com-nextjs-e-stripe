@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react';
+import { Check } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card';
-import { Button } from './ui/button';
+} from "./ui/card";
+import PaymentButton from "@/components/checkout";
 
 export default function PricingCard() {
   return (
@@ -23,7 +23,7 @@ export default function PricingCard() {
           R$29
           <span className="font-normal text-muted-foreground text-lg">
             /mês
-          </span>{' '}
+          </span>{" "}
         </p>
         <ul>
           <li className="flex gap-2 text-muted-foreground">
@@ -44,8 +44,8 @@ export default function PricingCard() {
           </li>
         </ul>
       </CardContent>
-      <CardFooter>
-        <Button className="w-full">Assine Agora</Button>
+      <CardFooter id='checkout'>
+        <PaymentButton>Assine Agora</PaymentButton>
       </CardFooter>
     </Card>
   );
