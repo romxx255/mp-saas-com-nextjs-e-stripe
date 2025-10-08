@@ -7,18 +7,18 @@ import { cn } from "@/lib/utils";
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
-export default async function Return({ searchParams }) {
+export default async function Return({ searchParams }: { searchParams: Promise<{ session_id: string }> }) {
   const { session_id } = await searchParams;
 
   if (!session_id)
     throw new Error("Please provide a valid session_id (`cs_test_...`)");
 
-  const {
-    status,
-    customer_details: { email: customerEmail },
-  } = await stripe.checkout.sessions.retrieve(session_id, {
+  const session = await stripe.checkout.sessions.retrieve(session_id, {
     expand: ["line_items", "payment_intent"],
   });
+
+  const { status } = session;
+  const customerEmail = session.customer_details?.email ?? 'No email provided';
 
   if (status === "open") {
     return redirect("/");
