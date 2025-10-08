@@ -1,87 +1,67 @@
-# SaaS com Next.js e Stripe
+## Visão Geral do Projeto
+- **Framework**: Next.js 15 (com Turbopack)
+- **Autenticação**: NextAuth.js
+- **Banco de Dados**: Prisma ORM com LibSQL/Turso
+- **UI**: Tailwind CSS com componentes Radix UI
+- **Pagamentos**: Integração com Stripe
 
-> Este Mini Projeto faz parte da série **Criando um SaaS com Next.js**  
->  
-> Mini Projeto 1: [SaaS Landing Page com Next.js e Shadcn UI](https://codante.io/mini-projetos/saas-landing-page-com-nextjs-e-shadcn-ui)  
-> Mini Projeto 2: [SaaS - Autenticação com NextAuth, Prisma e Next.js 15](https://codante.io/mini-projetos/autenticacao-com-nextauth-prisma-e-nextjs-15)  
-> Mini Projeto 3: SaaS com Next.js e Stripe (este projeto)
+## Estrutura Principal
 
-Neste mini projeto, você irá adicionar o Stripe como meio de pagamento e gerenciador de assinaturas do seu projeto. Sua aplicação deve permitir que usuários possam assinar (através de pagamentos recorrentes) bem como cancelar suas assinaturas. O produto (Ebook do mês) só deverá ser exibido para aqueles que são assinantes ativos. 
+### Dependências Principais
+- **Next.js 15** com suporte a Server Components
+- **Prisma** como ORM
+- **NextAuth** para autenticação
+- **Stripe** para processamento de pagamentos
+- **Tailwind CSS** para estilização
+- **Radix UI** para componentes acessíveis
 
+### Estrutura de Pastas
 
-## 🤓 Antes de começar
+1. [/app](app)
+   - Roteamento baseado no sistema de pastas do Next.js 13+
+   - `/auth` - Rotas relacionadas à autenticação
+   - [/dashboard](app/dashboard) - Área logada do usuário
+   - [/api](app/api) - Rotas da API
+   - [/actions](app/actions) - Server Actions do Next.js
 
-Para este projeto, já temos o template inicial do projeto preparado no repositório. Ao fazer o fork você encontrará todos os arquivos iniciais. 
+2. [/components](App/components)
+   - Componentes reutilizáveis da aplicação
 
->[!CAUTION]   
-> Como o Next 15 ainda é muito recente é possível que você encontre alguns erros de `peer deps` na hora de instalar suas dependências. É possível forçar uma instalação evitando esses erros usando o comando `npm install --force`.
+3. [/lib](App/lib)
+   - Código compartilhado e utilitários
 
-#### Setup do Turso
-Para que a autenticação funcione, é necessário que você tenha uma conta e database (gratuita) do [Turso](https://turso.tech) para a base de dados.
+4. [/prisma](prisma)
+   - Configuração do Prisma e migrações
 
-Pegue suas credenciais e complete o `.env` (ou `.env.local`) com as chaves 
-- `TURSO_AUTH_TOKEN=`
-- `TURSO_DATABASE_URL=`
+### Características Técnicas
 
-Se você quiser mais informações, vide o [Mini Projeto anterior](https://codante.io/mini-projetos/autenticacao-com-nextauth-prisma-e-nextjs-15) desta série.
+1. **Autenticação**:
+   - Sistema de autenticação com NextAuth
+   - Suporte a múltiplos provedores (incluindo credenciais e OAuth)
 
-#### Setup do NextAuth
-No Mini Projeto anterior também fizemos o Setup do NextAuth. Para tal, é necessário que você coloque qualquer string aleatória na chave `AUTH_SECRET=` e sua url (provavelmente http://localhost:3000) na chave `AUTH_URL=` todos no `.env` (ou `.env.local`).
+2. **Banco de Dados**:
+   - Prisma como ORM
+   - LibSQL (compatível com SQLite) como banco de dados
 
-## 🔨 Requisitos
+3. **Pagamentos**:
+   - Integração completa com Stripe
+   - Rotas para checkout e webhooks
 
-- **Faça o cadastro e setup de uma conta no Stripe**
-  - Crie uma conta e credenciais de teste no Stripe
+4. **UI/UX**:
+   - Design system com Tailwind CSS
+   - Componentes acessíveis do Radix UI
+   - Animações com Tailwind Animate
 
-> [!TIP]  
-> Recomendamos que você use os *sandboxes* do Stripe para testes. 
+5. **TypeScript**:
+   - Tipagem forte em todo o projeto
+   - Configuração moderna do TypeScript
 
-- **Implemente o pagamento recorrente da assinatura**
-  - Apenas usuários logados poderão assinar
-  - Utilize o Stripe como provedor de assinaturas
+6. **Variáveis de Ambiente**:
+   - env.example
 
-> [!TIP]  
-> Para facilitar o desenvolvimento você não precisa necessariamente utilizar a sua base de dados para gerenciar assinaturas. A escolha é sua, você deverá escolher se quer gerenciar assinante PRO pelo _Stripe_ ou pela base de dados. 
+7. **Ferramentas de Desenvolvimento**:
+   - ESLint para linting
+   - PostCSS para processamento de CSS
+   - Turbopack para desenvolvimento rápido
 
-- **Implemente o cancelamento da assinatura**
-  - Implemente um botão que deverá estar na dashboard para cancelar a assinatura
-  - Apenas usuários logados e assinantes poderão cancelar
-
-- **Implemente a troca de meio de pagamento**
-  - Você poderá tanto implementar pela API (mais difícil) como redirecionando para o portal no-code do Stripe (mais fácil)
-
-- **Proteger rotas**
-  - O produto (Ebook do Mês) somente deverá ser acessado por aqueles que possuem assinaturas ativas
-  - A tela de gerenciamento de assinatura somente deverá ser acessada por aqueles que possuem assinaturas ativas
-
-- **Remover botoes (call to action) de assinatura caso o usuário já seja assinante**
-  - Para uma UX melhor, não faz sentido mostrar botões de "Assine Agora" para quem já é assinante. 
-
-## 🎨 Design Sugerido
-
-O layout está no Figma e já está implementado no projeto. Você não precisará implementá-lo. 
-
-### Figma
-
-🔗 [Link do design](https://www.figma.com/community/file/1436880854972199964/mini-projeto-saas-com-next-js-e-stripe)
-
-## 👉🏽 Sobre esse mini-projeto
-
-### O que você irá praticar:
-
-#### Next.js
-
-- Conhecimentos sobre a configuração de páginas e rotas dinâmicas.
-
-#### Stripe
-
-- Integração completa com o Stripe para pagamentos e gestão de assinaturas.
-- Integração do NextAuth com Prisma e base de dados. 
-
-### Pré requisitos
-
-- Conhecimentos em JavaScript, React e NextJs.
-
-## Observações
-
-O correto é sempre marcar o se o usuário tem a assinatura no banco de dados.
+O projeto é uma aplicação Micro-SaaS (Software as a Service) completa, focada em gestão de livros ou conteúdo. A arquitetura segue as melhores práticas atuais de desenvolvimento web, com uma clara separação de responsabilidades e uso de tecnologias modernas.
